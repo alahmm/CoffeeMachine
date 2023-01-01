@@ -6,57 +6,30 @@ public class CoffeeMachine {
     public static int minimal (int a, int b, int c) {
         return (a <= b && a <= c) ? a : Math.min(b, c);
     }
-    public static void fill(int mlOfWater, int mlOfMilk, int gramsOfCoffee, int disposableCups) {
-        return;
-
+    public static void remaining (int mlOfWater, int mlOfMilk, int gramsOfCoffee, int disposableCups, int money) {
+        System.out.println();
+        System.out.println("The coffee machine has:");
+        System.out.printf("%d ml of water", mlOfWater);
+        System.out.printf("%n%d ml of milk", mlOfMilk);
+        System.out.printf("%n%d g of coffee beans", gramsOfCoffee);
+        System.out.printf("%n%d disposable cups", disposableCups);
+        System.out.printf("%n$%d of money", money);
+        System.out.println();
+    }
+    public static void take (int money) {
+        System.out.printf("I gave you $%d", money);
+        System.out.println();
     }
     public static void main(String[] args) {
-        String output = """
-                Starting to make a coffee
-                Grinding coffee beans
-                Boiling water
-                Mixing boiled water with crushed coffee beans
-                Pouring coffee into the cup
-                Pouring some milk into the cup
-                Coffee is ready!""";
-        //Scanner scanner = new Scanner(System.in);
-/*        int numberOfCups = scanner.nextInt();
-        System.out.printf("For %d cups of coffee you will need:", numberOfCups);
-        System.out.printf("%n%d ml of water", numberOfCups * 200);
-        System.out.printf("%n%d ml of milk", numberOfCups * 50);
-        System.out.printf("%n%d g of coffee beans", numberOfCups * 15);*/
-/*        System.out.println("Write how many ml of water the coffee machine has:");
-        int mlOfWater = scanner.nextInt();
-        System.out.println("Write how many ml of milk the coffee machine has:");
-        int mlOfMilk = scanner.nextInt();
-        System.out.println("Write how many grams of coffee beans the coffee machine has:");
-        int gramsOfCoffeeBeans = scanner.nextInt();
-        System.out.println("Write how many cups of coffee you will need: ");
-        int numberOfCups = scanner.nextInt();
-        long mlOfwaterRound = Math.round((double)mlOfWater / (numberOfCups * 200));
-        long mlOfMilkRound = Math.round((double)mlOfMilk / (numberOfCups * 50));
-        long gramesOfCoffeeRound = Math.round((double)gramsOfCoffeeBeans / (numberOfCups * 15));
-        if ((numberOfCups == 0 && (mlOfWater == 0 || mlOfMilk == 0 || gramsOfCoffeeBeans == 0)) ||
-                minimal(mlOfWater / 200, mlOfMilk / 50, gramsOfCoffeeBeans / 15) - numberOfCups == 0) {
-            System.out.println("Yes, I can make that amount of coffee");
-        } else if ((numberOfCups == 0 && mlOfWater != 0 && mlOfMilk != 0 && gramsOfCoffeeBeans != 0)||
-                minimal((int)mlOfwaterRound , (int)mlOfMilkRound, (int)gramesOfCoffeeRound) > 1) {
-            int numberOfAdditionalCups = minimal(mlOfWater / 200 , mlOfMilk / 50 , gramsOfCoffeeBeans / 15) - numberOfCups;
-            System.out.printf("Yes, I can make that amount of coffee (and even %d more than that)", numberOfAdditionalCups);
-        } else {
-                int numberOfPossibleCups = minimal(mlOfWater / 200 , mlOfMilk / 50 , gramsOfCoffeeBeans / 15);
-            System.out.printf("No, I can make only %d cup(s) of coffee", numberOfPossibleCups);
-        }*/
-        String status = """
-                The coffee machine has:
-                400 ml of water
-                540 ml of milk
-                120 g of coffee beans
-                9 disposable cups
-                $550 of money
-                """;
-        System.out.println(status);
-        System.out.println("Write action (buy, fill, take): ");
+        System.out.println("Write action (buy, fill, take, remaining, exit): ");
+        int mlofWaterOld = 400;
+        int mlOfMilkOld = 540;
+        int gramsOfCoffeeBeansOld = 120;
+        int numberOfCupsOld = 9;
+        int moneyOld = 550;
+        int[] listNew = new int[] {mlofWaterOld, mlOfMilkOld, gramsOfCoffeeBeansOld, numberOfCupsOld, moneyOld};
+        while (true) {
+
             Scanner scanner = new Scanner(System.in);
             String option = scanner.next();
             if (option.equals("fill")) {
@@ -68,69 +41,89 @@ public class CoffeeMachine {
                 int gramsOfCoffeeBeans = scanner.nextInt();
                 System.out.println("Write how many disposable cups you want to add:");
                 int numberOfCups = scanner.nextInt();
-                System.out.println();
-                System.out.println("The coffee machine has:");
-                System.out.printf("%d ml of water", mlOfWater + 400);
-                System.out.printf("%n%d ml of milk", mlOfMilk + 540);
-                System.out.printf("%n%d g of coffee beans", gramsOfCoffeeBeans + 120);
-                System.out.printf("%n%d disposable cups", numberOfCups + 9);
-                System.out.println();
-                System.out.println("$550 of money");
+                listNew[0] += mlOfWater;
+                listNew[1] += mlOfMilk;
+                listNew[2] += gramsOfCoffeeBeans;
+                listNew[3] += numberOfCups;
+                System.out.println("Write action (buy, fill, take, remaining, exit):");
+                continue;
 
             } else if (option.equals("buy")) {
-                System.out.println("What do you want to buy? 1 - espresso, 2 - latte, 3 - cappuccino:");
-                    int optionNext = scanner.nextInt();
-                    if (optionNext == 3) {
-                        System.out.println();
-                        int mlofWater = 400 - 200;
-                        int mlOfMilk = 540 - 100;
-                        int gramsOfCoffeeBeans = 120 - 12;
-                        int numberOfCups = 9;
-                        System.out.println("The coffee machine has:");
-                        System.out.printf("%d ml of water", mlofWater);
-                        System.out.printf("%n%d ml of milk", mlOfMilk);
-                        System.out.printf("%n%d g of coffee beans", gramsOfCoffeeBeans);
-                        System.out.printf("%n%d disposable cups", numberOfCups - 1);
-                        System.out.printf("%n%d of money", 550 + 6);
-                    } else if (optionNext == 2) {
-                        System.out.println();
-                        int mlofWater = 400 - 350;
-                        int mlOfMilk = 540 - 75;
-                        int gramsOfCoffeeBeans = 120 - 20;
-                        int numberOfCups = 9;
-                        System.out.println("The coffee machine has:");
-                        System.out.printf("%d ml of water", mlofWater);
-                        System.out.printf("%n%d ml of milk", mlOfMilk);
-                        System.out.printf("%n%d g of coffee beans", gramsOfCoffeeBeans);
-                        System.out.printf("%n%d disposable cups", numberOfCups - 1);
-                        System.out.printf("%n%d of money", 550 + 7);
+                System.out.println("What do you want to buy? 1 - espresso, 2 - latte, 3 - cappuccino, back - to main menu:");
+                String optionNext = scanner.next();
+                if(optionNext.equals("back")) {
+                    System.out.println("Write action (buy, fill, take, remaining, exit):");
+                    continue;
+                }
+                if (Integer.parseInt(optionNext) == 3) {
+                    if (minimal(listNew[0] / 200, listNew[1] / 50, listNew[2] / 15) >= 1) {
+                        System.out.println("I have enough resources, making you a coffee!");
+                        listNew[0] -= 200;
+                        listNew[1] -= 100;
+                        listNew[2] -= 12;
+                        listNew[3] -= 1;
+                        listNew[4] += 6;
                     } else {
-                        System.out.println();
-                        int mlofWater = 400 - 250;
-                        int gramsOfCoffeeBeans = 120 - 16;
-                        int numberOfCups = 9;
-                        System.out.println("The coffee machine has:");
-                        System.out.printf("%d ml of water", mlofWater);
-                        System.out.println();
-                        System.out.println("540 ml of milk");
-                        System.out.printf("%d g of coffee beans", gramsOfCoffeeBeans);
-                        System.out.printf("%n%d disposable cups", numberOfCups - 1);
-                        System.out.printf("%n%d of money", 550 + 4);
+                        if (listNew[0] < 200) {
+                            System.out.println("Sorry, not enough water!");
+                        } else if (listNew[1] < 100) {
+                            System.out.println("Sorry, not enough milk!");
+                        } else if (listNew[2] < 12){
+                            System.out.println("Sorry, not enough coffee beans!");
+                        }
                     }
-                } else if (option.equals("take")) {
-                int money = 550;
-                System.out.printf("I gave you $%d", money);
-                System.out.println();
-                String newStatus = """
-                        
-                        The coffee machine has:
-                        400 ml of water
-                        540 ml of milk
-                        120 g of coffee beans
-                        9 disposable cups""";
-                System.out.println(newStatus);
-                System.out.printf("$%d of money", 0);
+                    System.out.println("Write action (buy, fill, take, remaining, exit):");
+                    continue;
+                } else if (Integer.parseInt(optionNext) == 2) {
+                    if (minimal(listNew[0] / 350, listNew[1] / 75, listNew[2] / 20) >= 1) {
+                        System.out.println("I have enough resources, making you a coffee!");
+                        listNew[0] -= 350;
+                        listNew[1] -= 75;
+                        listNew[2] -= 20;
+                        listNew[3] -= 1;
+                        listNew[4] += 7;
+                    } else {
+                        if (listNew[0] < 350) {
+                            System.out.println("Sorry, not enough water!");
+                        } else if (listNew[1] < 75) {
+                            System.out.println("Sorry, not enough milk!");
+                        } else if (listNew[2] < 20){
+                            System.out.println("Sorry, not enough coffee beans!");
+                        }
+                    }
+                    System.out.println("Write action (buy, fill, take, remaining, exit):");
+                    continue;
+                } else if (Integer.parseInt(optionNext) == 1){
+                    if (Math.min(listNew[0] / 250, listNew[2] / 16) >= 1) {
+                        System.out.println("I have enough resources, making you a coffee!");
+                        listNew[0] -= 250;
+                        listNew[2] -= 16;
+                        listNew[3] -= 1;
+                        listNew[4] += 4;
+                    } else {
+                        if (listNew[0] < 250) {
+                            System.out.println("Sorry, not enough water!");
+                        } else if (listNew[2] < 16){
+                            System.out.println("Sorry, not enough coffee beans!");
+                        }
+                    }
+                    System.out.println("Write action (buy, fill, take, remaining, exit):");
+                    continue;
+                }
+            } else if (option.equals("take")) {
+                take(listNew[4]);
+                listNew[4] -= listNew[4];
+                System.out.println("Write action (buy, fill, take, remaining, exit):");
+                continue;
+            } else if (option.equals("remaining")) {
+                remaining(listNew[0], listNew[1], listNew[2], listNew[3], listNew[4]);
+                System.out.println("Write action (buy, fill, take, remaining, exit):");
+                continue;
+            } else {
+                return;
             }
+        }
+
     }
 }
 
