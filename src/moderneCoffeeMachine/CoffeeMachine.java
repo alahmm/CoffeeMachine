@@ -1,8 +1,12 @@
-package machine;
+package moderneCoffeeMachine;
 
 import java.util.Scanner;
 
 public class CoffeeMachine {
+        public static void Methode(String input) {
+            //[ToDo] Refactoring the Code in this Method, use more classes, make code more readable for developpers
+
+        }
     public static int minimal (int a, int b, int c) {
         return (a <= b && a <= c) ? a : Math.min(b, c);
     }
@@ -32,6 +36,7 @@ public class CoffeeMachine {
 
             Scanner scanner = new Scanner(System.in);
             String option = scanner.next();
+            Methode(option);
             if (option.equals("fill")) {
                 System.out.println("Write how many ml of water you want to add:");
                 int mlOfWater = scanner.nextInt();
@@ -120,6 +125,7 @@ public class CoffeeMachine {
 
     }
 }
+
 
 
 
